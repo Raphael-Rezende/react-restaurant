@@ -1,0 +1,39 @@
+.menu-container {
+    max-width: 1500px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.menu-cards {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.menu-card {
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin: 1rem;
+    width: 250px;
+    transition: transform 0.3s;
+    padding: 1rem;
+}
+
+.menu-card:hover {
+    transform: translateY(-5px);
+}
+
+.menu-image {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+    border: none; /* Remover borda */
+    display: block; /* Garante que não haja espaço abaixo da imagem */
+}
+
+.menu-price {
+    font-weight: bold;
+    font-size: 1.2rem;
+    color: #e67e22; /* Cor laranja */
+}

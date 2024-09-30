@@ -1,9 +1,9 @@
 .home-page header {
-    background-image: url(../utils/img/header-img.jpg);
+    background-image: url(../utils/img/banner-home4.jpg);
 }
 
 header {
-    background-size: cover;
+    background-size: auto;
     background-position: center;
 }
 
@@ -13,7 +13,8 @@ header h1 {
 
 .home-page header h1,
 .home-page header h2 {
-    text-shadow: 2px 2px 8px #ffffff;
+    text-shadow: 2px 2px 8px #b5a4a4;
+    color: blanchedalmond;
 }
 
 .menu-section {
