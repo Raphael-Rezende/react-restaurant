@@ -1,5 +1,8 @@
 .App {
-  text-align: center;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  
 }
 
 .App-logo {
@@ -13,16 +16,6 @@
   }
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
 
 .App-link {
   color: #61dafb;
@@ -35,4 +28,104 @@
   to {
     transform: rotate(360deg);
   }
+}
+.content {
+  flex: 1;
+  background-color: #f8f8f8;
+  transition: margin-right 0.3s ease-in-out;
+}
+
+.content.withSidebar {
+  margin-right: 340px; /* Espaço para o CartSidebar + margem */
+}
+
+/* Estilo para o Navbar */
+.navbar {
+  background-color:#f8f9fa !important;
+  box-shadow: 1px 3px 4px #198754;
+  position: fixed !important;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 1030;
+}
+
+.navbar .nav-link {
+  color: #000000 !important;
+}
+
+.navbar .nav-link:hover {
+  color: #198754 !important;
+}
+.navbar-collapse {
+  justify-content: end;
+  flex-grow: 0 !important;
+}
+
+@media (max-width: 992px) {
+  .content.withSidebar {
+    margin-right: 320px; /* No mobile, a sidebar pode sobrepor */
+  }
+  .navbar-collapse  {
+    display: none !important;
+  }
+  
+}
+
+@media (min-width: 992px) {
+  .btn-Menu {
+    display: none;
+  }
+  .order-icon {
+    display: none;
+  }
+
+}
+
+/* Estilo do ícone de pedidos */
+.order-icon {
+  position: relative;
+  cursor: pointer;
+  background-color: #fff;
+}
+
+.order-icon .badge {
+  position: absolute;
+  top: -5px;
+  right: -10px;
+  background-color: #ff5733;
+  color: #fff;
+  border-radius: 50%;
+  padding: 2px 6px;
+  font-size: 0.75rem;
+}
+
+.container-toggle {
+  display:flex;
+  justify-content: flex-end;
+  flex-wrap: nowrap;
+  align-items: baseline;
+}
+
+/* Icone para mobile, configurando estilos do botão pedidos*/
+.order {
+  position: relative;
+}
+
+.orderButton {
+  background: none;
+  border: none;
+  cursor: pointer;
+  position: relative;
+}
+
+.badge {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  background-color: #e74c3c;
+  color: #fff;
+  border-radius: 50%;
+  padding: 2px 6px;
+  font-size: 0.75rem;
 }

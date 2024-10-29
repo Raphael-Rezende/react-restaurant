@@ -4,104 +4,104 @@
     "Favoritos": [
       {
         "id": 1,
-        "name": "Calabresa",
+        "name": "Calabresa1",
         "description": "Massa fina de pizza coberta com queijo muzzarela e finas fatias de linguiça calabresa frita.",
-        "price": "R$35,90",
+        "price": 35.90,
         "image": "./images/Pizza+Calabresa.jpg"
       },
       {
-        "id": 1,
-        "name": "Calabresa",
+        "id": 2,
+        "name": "Calabresa2",
         "description": "Massa fina de pizza coberta com queijo muzzarela e finas fatias de linguiça calabresa frita.",
-        "price": "R$35,90",
+        "price": 35.90,
         "image": "./images/Pizza+Calabresa.jpg"
       },
       {
-        "id": 1,
-        "name": "Calabresa",
+        "id": 3,
+        "name": "Calabresa3",
         "description": "Massa fina de pizza coberta com queijo muzzarela e finas fatias de linguiça calabresa frita.",
-        "price": "R$35,90",
+        "price": 35.90,
         "image": "./images/Pizza+Calabresa.jpg"
       }
     ],
     "PizzasMenu":[
       {
-        "id": 1,
+        "id": 4,
         "name": "Calabresa",
         "description": "Massa fina de pizza coberta com queijo muzzarela e finas fatias de linguiça calabresa frita.",
-        "price": "R$35,90",
+        "price": 35.90,
         "image": "./images/Pizza+Calabresa.jpg"
     },
     {
-        "id": 2,
+        "id": 5,
         "name": "Portuguesa",
         "description": "Massa fina coberta com muzzarela, tomate, pimentão, cebola, champignon, ovo cozido, azeitona, presunto e linguiça calabresa.",
-        "price": "R$15",
+        "price": 15,
         "image": "./images/Pizza+de+Portuguesa.jpeg"
-    },
-    {
-        "id": 3,
-        "name": "Mussarela",
-        "description": "Massa fina coberta com molho de tomate, queijo muzzarela e orégano.",
-        "price": "R$15",
-      "image": "./images/Mussarela.jpg"
-    },
-    {
-        "id": 4,
-        "name": "Marguerita",
-        "description": "Massa fina coberta com muzzarela, finas fatias de tomate, folhas de manjericão fresco e orégano.",
-        "price": "R$15",
-        "image": "./images/Matgarita.jpg"
-    },
-    {
-        "id": 5,
-        "name": "4 queijos",
-        "description": "Massa fina coberta com muzzarela, parmesão, gorgonzola e queijo tipo catupiry.",
-        "price": "R$15",
-        "image": "./images/4-queijos.jpg"
     },
     {
         "id": 6,
         "name": "Mussarela",
         "description": "Massa fina coberta com molho de tomate, queijo muzzarela e orégano.",
-        "price": "R$15",
-        "image": "./images/Mussarela.jpg"
+        "price": 15,
+      "image": "./images/Mussarela.jpg"
     },
     {
         "id": 7,
+        "name": "Marguerita",
+        "description": "Massa fina coberta com muzzarela, finas fatias de tomate, folhas de manjericão fresco e orégano.",
+        "price": 15,
+        "image": "./images/Matgarita.jpg"
+    },
+    {
+        "id": 8,
+        "name": "4 queijos",
+        "description": "Massa fina coberta com muzzarela, parmesão, gorgonzola e queijo tipo catupiry.",
+        "price": 15,
+        "image": "./images/4-queijos.jpg"
+    },
+    {
+        "id": 9,
         "name": "Mussarela",
         "description": "Massa fina coberta com molho de tomate, queijo muzzarela e orégano.",
-        "price": "R$15",
+        "price": 15,
+        "image": "./images/Mussarela.jpg"
+    },
+    {
+        "id": 10,
+        "name": "Mussarela",
+        "description": "Massa fina coberta com molho de tomate, queijo muzzarela e orégano.",
+        "price": 15,
         "image": "./images/Mussarela.jpg"
     }
     ],
     "PromoCombos":[
       {
-        "id": 1,
+        "id": 11,
         "name": "Mussarela + Coca 2L",
         "description": "1 MUSSARELA (Massa fina coberta com molho de tomate, queijo muzzarela e orégano.), acompanhado com uma Coca 2l, por apenas:",
-        "price": "R$23,99",
+        "price": 23.99,
         "image": "./images/combo1.avif"
     },
     {
-        "id": 2,
+        "id": 12,
         "name": "Combo Família",
         "description": "3 Pizzas GRANDES (qualquer sabor) + 1 REFRI 2L ",
-        "price": "R$58,99",
+        "price": 58.99,
         "image": "./images/combo2.avif"
     },
     {
-        "id": 3,
+        "id": 13,
         "name": "Combo Sobremesa",
         "description": "Combo Pizza Salgada 8 fatias + Pizza Doce Pequena + Refri 2L",
-        "price": "R$89,90",
+        "price": 89.90,
         "image": "./images/combo3.jpg"
     },
     {
-        "id": 4,
+        "id": 14,
         "name": "Combo Família",
         "description": "3 Pizzas GRANDES (qualquer sabor) + 1 REFRI 2L  ",
-        "price": "R$58,99",
+        "price": 58.99,
         "image": "./images/combo2.avif"
     }
     ]

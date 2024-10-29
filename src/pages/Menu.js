@@ -1,13 +1,18 @@
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import './Menu.css';
 //import { Card, CardBody, CardText, CardTitle } from 'react-bootstrap';
 import CardMenu from '../components/CardMenu';
+
+// importando o reducer do carrinho, trocando informações de filho para filho
+import { CartContext } from '../context/CardContext';
 
 
 function Menu() {
     const [data, setData] = useState(null);
 
+    //função para preencher o array em CartContext
+    const { addToCart } = useContext(CartContext);
     useEffect(() => {
       fetch('/data.json')
         .then(response => response.json())
@@ -18,6 +23,8 @@ function Menu() {
     if (!data) {
       return <div>Loading...</div>;
     }
+
+    
     return (
         <div className='menu-page'>
             <header className='mt-5'>
@@ -32,7 +39,11 @@ function Menu() {
                     <div className='row'>
                         <div className='d-sm-flex flex-row flex-wrap'>
                             {data.PizzasMenu.map(item => (
-                                <CardMenu key={item.id} item={item} />
+                                <CardMenu 
+                                    key={item.id}  
+                                    item={item}
+                                    btnPedido={true}
+                                    onClick={ () => addToCart(item)} />
                             ))}
                         </div>
                     </div>
@@ -45,7 +56,12 @@ function Menu() {
                     <div className='row'>
                         <div className='d-flex flex-row flex-wrap'>
                             {data.PromoCombos.map(item => (
-                                <CardMenu key={item.id} item={item} />
+                                <CardMenu 
+                                    key={item.id} 
+                                    item={item} 
+                                    btnPedido={true}
+                                    onClick={() => addToCart(item)}
+                                     />
                             ))}
                         </div>
                     </div>
@@ -59,7 +75,11 @@ function Menu() {
                     <div className='row'>
                         <div className='d-flex flex-row flex-wrap'>
                             {data.PromoCombos.map(item => (
-                                <CardMenu key={item.id} item={item} />
+                                <CardMenu 
+                                    key={item.id}  
+                                    item={item}
+                                    btnPedido={true}
+                                    onClick={() => addToCart(item)} />
                             ))}
                         </div>
                     </div>

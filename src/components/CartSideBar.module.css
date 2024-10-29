@@ -1,0 +1,175 @@
+
+  
+  .title {
+    font-size: 1.5rem;
+    color: #d35400;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  
+  .empty {
+    color: #555;
+    text-align: center;
+    margin-top: 50px;
+  }
+  
+  .cartList {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .cartItem {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+  }
+  
+  .itemName {
+    font-weight: bold;
+    color: #333;
+  }
+  
+  .itemPrice {
+    color: #e67e22;
+  }
+  
+  .itemControls {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .quantityInput {
+    width: 50px;
+    padding: 5px;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    text-align: center;
+  }
+  
+  .removeButton {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1.2rem;
+  }
+  
+  .footer {
+    margin-top: 20px;
+    text-align: center;
+  }
+  
+  .total {
+    display: block;
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  
+  .sendButton {
+    background-color: #27ae60;
+    color: #fff;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s;
+  }
+  
+  .sendButton:hover {
+    background-color: #219150;
+  }
+  /* Classes de Transição 
+.sidebar-enter .sidebar {
+  transform: translateX(100%);
+  opacity: 0;
+}
+
+.sidebar-enter-active .sidebar {
+  transform: translateX(0);
+  opacity: 1;
+}
+
+.sidebar-exit .sidebar {
+  transform: translateX(0);
+  opacity: 1;
+}
+
+.sidebar-exit-active .sidebar {
+  transform: translateX(100%);
+  opacity: 0;
+}
+
+/* Ajustes para mobile */
+@media (max-width: 768px) {
+  .sidebar {
+    width: 100%;
+    right: 0;
+    top: 0;
+    height: 100%;
+    border-radius: 0;
+    background-image: none; /* Usar cor sólida */
+    background-color: #fff;
+    transform: translateX(20%);
+    opacity: 0;
+  }
+
+  .sidebar-enter .sidebar {
+    transform: translateX(100%);
+  }
+
+  .sidebar-enter-active .sidebar {
+    transform: translateX(0);
+  }
+
+  .sidebar-exit .sidebar {
+    transform: translateX(0);
+  }
+
+  .sidebar-exit-active .sidebar {
+    transform: translateX(100%);
+  }
+}
+
+  
+  /* Backdrop */
+.backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5); /* Semi-transparente */
+  z-index: 999; /* Abaixo do sidebar */
+  opacity: 0;
+  transition: opacity 300ms ease-in-out;
+  pointer-events: none;
+}
+
+.sidebar-enter .backdrop {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.sidebar-enter-active .backdrop {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.sidebar-exit .backdrop {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.sidebar-exit-active .backdrop {
+  opacity: 0;
+  pointer-events: none;
+}
+
+

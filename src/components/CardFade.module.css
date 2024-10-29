@@ -1,0 +1,20 @@
+.cardBody {
+    width: 350px;
+ 
+    /*display: flex;*/
+    /*justify-content: flex-start;*/
+    /*flex-wrap: nowrap;*/
+    /*border-inline: 6px solid #198754;*/
+
+}
+
+.div {
+    width: 355px;
+    border-radius: 10px;
+    border-inline-start: solid;
+    border-inline-end: solid;
+    border-color: #198754;
+
+    
+    
+}
