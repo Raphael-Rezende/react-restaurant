@@ -9,6 +9,7 @@ import CartSidebar from './CartSideBar';
 import NavSide from './NavSide';
 import { CSSTransition } from 'react-transition-group';
 
+
 const SideBar = ({ onClick, isOrderProps, cartItemsProps, isNavProps }) => {
   return (
     <div>
@@ -16,17 +17,17 @@ const SideBar = ({ onClick, isOrderProps, cartItemsProps, isNavProps }) => {
       {/* Backdrop para fechar o sidebar ao clicar fora */}
       {/* Botão de fechar */}
       
-      {(isOrderProps && cartItemsProps > 0) ?
+      {(isOrderProps) ?
         
         <div>
 
           <div className={styles.backdrop} onClick={onClick}></div>
-          <div className={styles.sidebar}>
+          <div className={styles.cartSidebar}>
             <button className={styles.closeButton} onClick={onClick}>
               <FaTimes size={20} />
             </button>  
             <CSSTransition
-            in={isOrderProps && cartItemsProps > 0}
+            in={isOrderProps}
             timeout={300}
             classNames="sidebar"
             unmountOnExit

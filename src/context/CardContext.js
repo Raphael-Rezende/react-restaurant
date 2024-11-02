@@ -11,26 +11,30 @@ export const CartProvider = ({ children }) => {
   });
 
   const [isSidebarOpen, setIsSidebarOpen] = useState(false); // Novo estado para controlar a visibilidade do sidebar
+
+  // Para abrir o modal (State setado quando o clico no 'Enviar Pedidos')
+  const [openModal, setOpenModal] = useState(false);
+
   const [openAlert, setOpenAlert] = useState(false);
   const [auxCardItens, setAuxCardItens] = useState(false);
-  
-    // Pegando dimensões da tela, para controle do sidebar
+
+  // Pegando dimensões da tela, para controle do sidebar
   const [screenWidth, setScreenWidth] = useState(window.innerWidth);
 
   useEffect(() => {
 
-    console.log('quantidade de items: ', cartItems.length, 'aux', auxCardItens);
     if (cartItems.length != 0) {
       if (auxCardItens <= cartItems.length) {
-        console.log('open:', openAlert);
         setOpenAlert(true)
         setTimeout(() => setOpenAlert(false), 5000)
       }
       setAuxCardItens(cartItems.length)
     }
-    
+
+
+
     localStorage.setItem('cartItems', JSON.stringify(cartItems));
-    
+
     // Atualiza o screenWidth(state que guarda a largura da tela), e para melhor performance a função AddEventListener é cancelada devido a re-renderizações frequentes.
     const handleResize = () => setScreenWidth(window.innerWidth);
     window.addEventListener("resize", handleResize);
@@ -54,10 +58,14 @@ export const CartProvider = ({ children }) => {
         return [...prevItems, { ...item, quantity: 1 }];
       }
     });
-    if(screenWidth > 992){
+    if (screenWidth < 992) {
+      setIsSidebarOpen(false)
+    } else {
+
       setIsSidebarOpen(true); // Abrir sidebar ao adicionar item
     }
-    
+
+
   };
 
   // Remover item do carrinho
@@ -97,6 +105,9 @@ export const CartProvider = ({ children }) => {
     setIsSidebarOpen(false);
   }
 
+   // Calcular o total
+   const total = cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0);
+
   return (
     <CartContext.Provider
       value={{
@@ -110,6 +121,9 @@ export const CartProvider = ({ children }) => {
         controlToggleSidebar,
         openAlert,
         screenWidth,
+        setOpenModal,
+        openModal,
+        total
       }}
     >
       {children}

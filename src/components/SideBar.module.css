@@ -6,7 +6,26 @@
   border-radius: 15px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   font-family: 'Courier New', Courier, monospace;
-  /*background-image: url('../../public/images/notepad-bg.webp'); Imagem de fundo estilo bloco de anotações */
+  
+  background-size: cover;
+  position: fixed;
+  top: 60px; /* Espaço para a navbar fixa */
+  right: 20px;
+  height: calc(100% - 80px);
+  overflow-y: auto;
+  transform: translateX(10%);
+  z-index: 1000;
+  transition: transform 700ms ease-in-out, opacity 700ms ease-in-out;
+}
+.cartSidebar {
+  width: 320px;
+  background-color: #fff;
+  /*background-color: rgb(220, 154, 22);*/
+  margin-top: 10px;
+  border-radius: 15px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  font-family: 'Courier New', Courier, monospace;
+  background-image: url('../../public/images/notepad-bg.webp'); /*Imagem de fundo estilo bloco de anotações */
   background-size: cover;
   position: fixed;
   top: 60px; /* Espaço para a navbar fixa */

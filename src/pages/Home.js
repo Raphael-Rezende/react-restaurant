@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { MenuBtn } from '../components/MenuBtn';
 import './Home.css';
 import AboutImg from '../utils/img/about-img.jpg';
@@ -8,8 +8,13 @@ import { ContactInfo } from '../components/ContactInfo';
 import ContactImage from '../utils/img/contact-img.jpg';
 import CardMenu from '../components/CardMenu';
 
+// importando o reducer do carrinho, trocando informações de filho para filho
+import { CartContext } from '../context/CardContext';
+
 function Home() {
     const [data, setData] = useState(null);
+
+    const { addToCart } = useContext(CartContext);
 
     useEffect(() => {
       fetch('/data.json')
@@ -57,7 +62,7 @@ function Home() {
                     <div className='row mb-5 w-100 '>
                         <div className='d-flex flex-row flex-wrap'>  
                             {data.Favoritos.map(item => (
-                                <CardMenu key={item.id} item={item} />
+                                <CardMenu key={item.id} item={item} btnPedido={true} onClick={() => addToCart(item)}/>
                             ))}
                         </div>
                     </div>

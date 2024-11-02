@@ -16,15 +16,22 @@ import { CiCircleAlert } from "react-icons/ci";
 
 
 // Side bar do pedidos 
-//import CartSideBar from './components/CartSideBar';
 import SideBar from './components/SideBar';
+// Modal de formulario para enviar pedido do cliente
+import OrderModal from './components/OrderModal';
 import { CartContext } from './context/CardContext';
 import { CSSTransition } from 'react-transition-group';
 import { NavbarToggle } from 'react-bootstrap';
 import CardFade from './components/CardFade';
 
 function App() {
-  const { cartItems, isSidebarOpen, toggleSidebar, controlToggleSidebar, openAlert, screenWidth} = useContext(CartContext);
+  const { cartItems,
+    isSidebarOpen,
+    toggleSidebar,
+    controlToggleSidebar,
+    openAlert,
+    screenWidth, 
+    openModal } = useContext(CartContext);
 
 
 
@@ -41,9 +48,11 @@ function App() {
 
   // Função de ciclo do componente, nesse caso, ele atualiza toda vez que o carrinho estiver cheio 
   useEffect(() => {
-    if (isSidebarOpen && cartItems.length > 0) {
+    if (isSidebarOpen) {
       setIsNav(false);
 
+    }else if(isNav){
+      toggleSidebar()
     }
   }, [isSidebarOpen && cartItems.length]);
 
@@ -52,11 +61,10 @@ function App() {
   if (isNav && screenWidth > 992) {
     setIsNav(false)
   }
-  console.log('isNAV', isNav, 'SideOpen',isSidebarOpen)
-  // Calcular o total de itens no carrinho
-  const totalItems = cartItems.reduce((acc, item) => acc + item.quantity, 0);
+
   return (
     <div className="App">
+      <OrderModal isOpen={openModal} />
       <Navbar expand="lg" className='navbar'>
         <Container style={{ flexWrap: 'nowrap' }}>
           <Navbar.Brand>
@@ -66,18 +74,19 @@ function App() {
           </Navbar.Brand>
           <Container className="container-toggle">
             <div className="order-icon d-lg-none me-3">
-              <PiNotepadLight size={24} onClick={toggleSidebar} />
+              <PiNotepadLight size={24} onClick={() => toggleSidebar()} />
               <span className="badge">{cartItems.length}</span>
             </div>
             <Navbar.Collapse id="basic-navbar-nav" className='navbar-collapse'>
               <Nav className="me-auto">
                 <Nav.Link as={Link} to="/">Início</Nav.Link>
                 <Nav.Link as={Link} to="/menu">Cardápio</Nav.Link>
+                <Nav.Link as={Link} onClick={toggleSidebar}>Seus Pedidos</Nav.Link>
                 <Nav.Link as={Link} to="/about">Sobre Nós</Nav.Link>
                 <Nav.Link href="https://instagram.com" target="_blank">
                   Siga-nos no Instagram <FaInstagram />
                 </Nav.Link>
-                <Nav.Link href="https://wa.me/5531999999999" target="_blank">
+                <Nav.Link href="https://wa.me/5537999865444" target="_blank">
                   Fale Conosco <FaWhatsapp />
                 </Nav.Link>
               </Nav>
@@ -105,9 +114,10 @@ function App() {
 
       </CSSTransition>
 
-      <CardFade open={openAlert}><CiCircleAlert size={25} color='#198754' /><span style={{marginLeft: '10px', color: '#198754', fontWeight:'bold'}}>Item Adicionado no carrinho</span></CardFade>
+      <CardFade open={openAlert}><CiCircleAlert size={25} color='#198754' /><span style={{ marginLeft: '10px', color: '#198754', fontWeight: 'bold' }}>Item Adicionado no carrinho</span></CardFade>
 
       <main className={`content ${isNav || isSidebarOpen ? 'withSidebar' : ''}`}>
+
         <Routes>
           <Route path='/' element={<Home />} />
           <Route path='/menu' element={<Menu />} />

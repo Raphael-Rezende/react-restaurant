@@ -1,0 +1,179 @@
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  transition: opacity 0.3s ease;
+  z-index: 1099;
+  /* Aumentar valor, se necessário */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+}
+
+.overlay.ReactModal__Overlay--after-open {
+  opacity: 1;
+
+}
+
+.overlay.ReactModal__Overlay--before-close {
+  opacity: 0;
+}
+
+.modal {
+  position: relative;
+  background-color: #fff;
+  padding: 1.5rem;
+  border-radius: 8px;
+  width: 90%;
+  /* Tamanho adaptável */
+  max-width: 600px;
+  /* Tamanho máximo para telas maiores */
+  max-height: 97vh;
+  /* Limite de altura para evitar rolagem */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  z-index: 2000;
+  /* Deve ser maior que o overlay */
+  margin-top: 5px;
+  overflow: auto;
+}
+
+.modalContent {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.title {
+  font-size: 1.5rem;
+  color: #333;
+  text-align: center;
+
+}
+
+/* Adiciona um estilo para o botão de fechar */
+.closeButton {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #333;
+  cursor: pointer;
+}
+
+/* Estilo para o contêiner dos inputs lado a lado */
+.inputRow {
+  display: flex;
+  gap: 1rem;
+}
+
+.inputRow .formField {
+  flex: 1; /* Garante que os inputs compartilhem o espaço igualmente */
+}
+
+
+.formField {
+  
+  display: flex;
+  flex-direction: column;
+}
+
+.formField label {
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+.formField input {
+  width: 100%;
+  padding: 0.75rem;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+}
+
+.paymentOption {
+  display: flex;
+  flex-direction: column;
+}
+
+.paymentOption label {
+  font-size: 1rem;
+  margin-right: 1rem;
+}
+
+.button {
+  background-color: #e63946;
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 4px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  align-self: center;
+  width: 100%;
+  max-width: 200px;
+  margin-top: 0.5rem;
+}
+
+.button:hover {
+  background-color: #d62828;
+}
+
+/* Responsividade adicional */
+@media (max-width: 480px) {
+  .modal {
+    width: 95%;
+    padding: 1rem;
+  }
+  .title {
+    font-size: 1.25rem;
+  }
+  .button {
+    font-size: 0.9rem;
+    padding: 0.5rem 1rem;
+  }
+}
+
+.itemTagsContainer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+  justify-content: center;
+}
+
+.itemTag {
+  background-color: #f4a261; /* Cor de fundo destacada */
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 12px;
+  font-size: 0.9rem;
+  font-weight: bold;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.errorMessage {
+  color: red;
+  font-size: 0.8rem;
+  margin-top: 0.2rem;
+  display: flex;
+  align-items: center;
+}
+
+.errorField input {
+  border: 1px solid red;
+  transition: border-color 0.3s ease;
+}
+
+.errorField label {
+  color: red;
+}

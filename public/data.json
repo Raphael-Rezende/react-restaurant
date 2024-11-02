@@ -4,21 +4,21 @@
     "Favoritos": [
       {
         "id": 1,
-        "name": "Calabresa1",
+        "name": "Calabresa",
         "description": "Massa fina de pizza coberta com queijo muzzarela e finas fatias de linguiça calabresa frita.",
         "price": 35.90,
         "image": "./images/Pizza+Calabresa.jpg"
       },
       {
         "id": 2,
-        "name": "Calabresa2",
+        "name": "Calabresa",
         "description": "Massa fina de pizza coberta com queijo muzzarela e finas fatias de linguiça calabresa frita.",
         "price": 35.90,
         "image": "./images/Pizza+Calabresa.jpg"
       },
       {
         "id": 3,
-        "name": "Calabresa3",
+        "name": "Calabresa",
         "description": "Massa fina de pizza coberta com queijo muzzarela e finas fatias de linguiça calabresa frita.",
         "price": 35.90,
         "image": "./images/Pizza+Calabresa.jpg"
