@@ -90,7 +90,7 @@ const OrderModal = ({ isOpen }) => {
 
       // Abrir WhatsApp com a mensagem formatada
       const phoneNumber = "5537999865444"; // Substitua pelo número do restaurante
-      const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+      const whatsappUrl = `https://api.whatsapp.com/send?phone=${phoneNumber}&text=${encodeURIComponent(message)}`;
       window.open(whatsappUrl, '_blank');
 
       clearCart();
