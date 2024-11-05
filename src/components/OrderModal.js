@@ -114,15 +114,18 @@ const OrderModal = ({ isOpen }) => {
       className={styles.modal}
       overlayClassName={styles.overlay}
       style={{ overlay: { zIndex: 1000 } }} // Configuração inline
+
     >
-      <div className={styles.modalContent}>
+      <div className={styles.modalContent} translate='no'>
 
         {/* Botão de Fechar */}
         <button onClick={() => setOpenModal(false)} className={styles.closeButton}>
           &times;
         </button>
         <h2 className={styles.title}>Informe seus Dados</h2>
-
+        <div className={styles.warningMessage}>
+          ⚠️ Você será redirecionado para a tela do WhatsApp. Por favor, verifique se o mesmo está funcionando.
+        </div>
         {/* Exibir tags dos itens */}
         <div style={{ flex: 'display', flexDirection: 'row' }}>
           <span style={{ fontWeight: 'bold', marginRight: '0.5rem' }}>Seus Pedidos: </span>
@@ -159,7 +162,7 @@ const OrderModal = ({ isOpen }) => {
 
           <div className={styles.inputRow}>
             <div className={styles.formField}>
-              <label>Número:</label>
+              <label>Número da Rua:</label>
               <input type="text" value={number} onChange={handleNumber} />
             </div>
             <div className={styles.formField}>

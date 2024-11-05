@@ -177,3 +177,16 @@
 .errorField label {
   color: red;
 }
+
+.warningMessage {
+  background-color: #fff4e5;
+  color: #a94442;
+  padding: 8px 12px;
+  border: 1px solid #f0ad4e;
+  border-radius: 5px;
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  margin: 12px 0;
+  text-align: center;
+}

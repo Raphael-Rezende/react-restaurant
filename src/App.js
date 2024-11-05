@@ -63,7 +63,7 @@ function App() {
   }
 
   return (
-    <div className="App">
+    <div className="App" translate='no'>
       <OrderModal isOpen={openModal} />
       <Navbar expand="lg" className='navbar'>
         <Container style={{ flexWrap: 'nowrap' }}>
