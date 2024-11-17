@@ -12,8 +12,8 @@ const NavSide = (isOpen, toggleSidebar) => {
           <li><a href="/">Início</a></li>
           <li><a href="/menu">Cardápio</a></li>
           <li><a href="/about">Sobre Nós</a></li>
-          <li><a href="https://instagram.com" target="_blank">Siga-nos no Instagram <FaInstagram /></a></li>
-          <li><a href="https://wa.me/5537999865444" target="_blank">Fale Conosco <FaWhatsapp /> </a></li>
+          <li><a href="https://instagram.com" target="_blank" rel="noopener noreferrer">Siga-nos no Instagram <FaInstagram /></a></li>
+          <li><a href="https://wa.me/5537999865444" target="_blank" rel="noopener noreferrer">Fale Conosco <FaWhatsapp /> </a></li>
         </ul>
         <div className={styles.logo}>
           

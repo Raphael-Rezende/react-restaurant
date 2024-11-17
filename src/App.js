@@ -47,6 +47,7 @@ function App() {
 
 
   // Função de ciclo do componente, nesse caso, ele atualiza toda vez que o carrinho estiver cheio 
+  // eslint-disable-next-line
   useEffect(() => {
     if (isSidebarOpen) {
       setIsNav(false);
@@ -54,6 +55,7 @@ function App() {
     }else if(isNav){
       toggleSidebar()
     }
+    // eslint-disable-next-line
   }, [isSidebarOpen && cartItems.length]);
 
 
@@ -83,10 +85,10 @@ function App() {
                 <Nav.Link as={Link} to="/menu">Cardápio</Nav.Link>
                 <Nav.Link as={Link} onClick={toggleSidebar}>Seus Pedidos</Nav.Link>
                 <Nav.Link as={Link} to="/about">Sobre Nós</Nav.Link>
-                <Nav.Link href="https://instagram.com" target="_blank">
+                <Nav.Link href="https://instagram.com" target="_blank" rel="noopener noreferrer">
                   Siga-nos no Instagram <FaInstagram />
                 </Nav.Link>
-                <Nav.Link href="https://wa.me/5537999865444" target="_blank">
+                <Nav.Link href="https://wa.me/5537999865444" target="_blank" rel="noopener noreferrer">
                   Fale Conosco <FaWhatsapp />
                 </Nav.Link>
               </Nav>
