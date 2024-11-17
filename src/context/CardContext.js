@@ -1,4 +1,4 @@
-import React, { createContext, useState, useEffect } from 'react';
+import React, { createContext, useState, useEffect, useRef } from 'react';
 
 // Criação do contexto
 export const CartContext = createContext();
@@ -9,6 +9,7 @@ export const CartProvider = ({ children }) => {
     const storedCart = localStorage.getItem('cartItems');
     return storedCart ? JSON.parse(storedCart) : [];
   });
+  const timeoutRefs = useRef([]);
 
   const [isSidebarOpen, setIsSidebarOpen] = useState(false); // Novo estado para controlar a visibilidade do sidebar
 
@@ -16,30 +17,27 @@ export const CartProvider = ({ children }) => {
   const [openModal, setOpenModal] = useState(false);
 
   const [openAlert, setOpenAlert] = useState(false);
-  const [auxCardItens, setAuxCardItens] = useState(false);
+
 
   // Pegando dimensões da tela, para controle do sidebar
   const [screenWidth, setScreenWidth] = useState(window.innerWidth);
 
+  // eslint-disable-next-line
   useEffect(() => {
-
-    if (cartItems.length != 0) {
-      if (auxCardItens <= cartItems.length) {
-        setOpenAlert(true)
-        setTimeout(() => setOpenAlert(false), 5000)
-      }
-      setAuxCardItens(cartItems.length)
-    }
-
-
-
+   
     localStorage.setItem('cartItems', JSON.stringify(cartItems));
 
     // Atualiza o screenWidth(state que guarda a largura da tela), e para melhor performance a função AddEventListener é cancelada devido a re-renderizações frequentes.
     const handleResize = () => setScreenWidth(window.innerWidth);
     window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize)
 
+      // Isso evita que os timeouts continuem ativos após a desmontagem do componente, prevenindo vazamentos de memória.
+      timeoutRefs.current.forEach((timeout) => clearTimeout(timeout));
+      timeoutRefs.current = [];
+    };
+    // eslint-disable-next-line
   }, [cartItems], []);
 
   // Adicionar item ao carrinho
@@ -64,6 +62,17 @@ export const CartProvider = ({ children }) => {
 
       setIsSidebarOpen(true); // Abrir sidebar ao adicionar item
     }
+    //exibir alerta de sucesso
+
+    setOpenAlert(true);
+
+    //  esconder o alerta após alguns segundos
+    const hideAlertTimeout = setTimeout(() => {
+      setOpenAlert(false);
+
+      // Armazena a referência do timeout
+      timeoutRefs.current.push(hideAlertTimeout);
+    }, 2500); // Alerta será visível por 3 segundos
 
 
   };
@@ -105,8 +114,8 @@ export const CartProvider = ({ children }) => {
     setIsSidebarOpen(false);
   }
 
-   // Calcular o total
-   const total = cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0);
+  // Calcular o total
+  const total = cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0);
 
   return (
     <CartContext.Provider

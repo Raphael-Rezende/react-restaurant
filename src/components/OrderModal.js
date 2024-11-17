@@ -1,6 +1,13 @@
 import React, { useState, useContext } from 'react';
 import Modal from 'react-modal';
 import styles from './OrderModal.module.css';
+import CardFade from './CardFade';
+import { CiCircleAlert } from "react-icons/ci";
+
+// Validação de erros no Formulária
+import { useForm } from "react-hook-form";
+
+import ReCAPTCHA from "react-google-recaptcha";
 
 import { CartContext } from '../context/CardContext';
 
@@ -15,97 +22,70 @@ const OrderModal = ({ isOpen }) => {
     cartItems,
     total,
     clearCart,
-    toggleSidebar
+    toggleSidebar,
+    screenWidth
   } = useContext(CartContext);
 
-  const [paymentMethod, setPaymentMethod] = useState('');
-  const [changeValue, setChangeValue] = useState('');
-  const [name, setName] = useState('');
-  const [number, setNumber] = useState('');
-  const [address, setAddress] = useState('');
-  const [reference, setReference] = useState('');
+  const { register, handleSubmit, formState: { errors }, getValues, reset } = useForm();
+  const [select, setSelect] = useState('dinheiro')
 
-  const [isFormValid, setIsFormValid] = useState(false);
-  const [errorAdress, setErrorAdress] = useState(false);
-  const [errorChangeValue, setErrorChangeValue] = useState(false);
-  const [errorPaymentMethod, setErrorPaymentMethod] = useState(false);
+
+
+  const [captcha, setCaptcha] = useState("");
+  const [openAlert, setOpenAlert] = useState(false);
 
 
 
 
-  const handlePaymentChange = (event) => {
-    setPaymentMethod(event.target.value);
-    setErrorPaymentMethod(false)
-  };
-
-  const handleChangeValue = (event) => {
-    setChangeValue(event.target.value);
-    setErrorChangeValue(false)
-  };
-  const handleName = (event) => {
-    setName(event.target.value);
-    setIsFormValid(false)
-  };
-  const handleNumber = (event) => {
-    setNumber(event.target.value);
-  };
-  const handleAddress = (event) => {
-    setAddress(event.target.value);
-    setErrorAdress(false)
-  };
-  const handleReference = (event) => {
-    setReference(event.target.value);
-  };
 
 
-  const handleFormSubmit = (event) => {
-    event.preventDefault();
 
-    let orders = []
-    cartItems.map((item) => (
-      orders.push(item.name + ' (' + item.quantity.toString() + ') ')
-    ))
+  const onSubmit = (data) => {
 
-    // Verifica se todos os campos obrigatórios estão preenchidos
-    const isValid = name && address &&
-      paymentMethod && (paymentMethod !== 'dinheiro' || changeValue);
+    if (captcha) {
 
-    if (name === '') setIsFormValid(true)
-    if (address === '') setErrorAdress(true)
-    if (changeValue === '') setErrorChangeValue(true)
-    if (paymentMethod !== 'dinheiro') setErrorPaymentMethod(true)
+      setOpenAlert(false)
 
-
-    if (isValid) {
-
+      let orders = []
+      cartItems.map((item) => (
+        orders.push(item.name + ' (' + item.quantity.toString() + ') ')
+      ))
       // Formatação da mensagem para WhatsApp
-      const message = `*Pedido para ${name}*\n\n` +
+      const message = `*Pedido para ${data.name}*\n\n` +
         `📑 *Pedidos:* ${orders}\n` +
-        `📍 *Endereço:* ${address}, *Número:* ${number}\n` +
-        `🔖 *Referência:* ${reference}\n` +
+        `📍 *Endereço:* ${data.address}, *Número:* ${data.number}\n` +
+        `🔖 *Referência:* ${data.reference}\n` +
         `⏰ *Hora do Pedido:* ${new Date().toLocaleString()}\n` +
         `💰 *Valor Total:* R$ ${total}\n` +
-        `💳 *Forma de Pagamento:* ${paymentMethod}` +
-        (paymentMethod === 'dinheiro' ? `\n💵 *Troco para:* R$ ${changeValue}` : '');
+        `💳 *Forma de Pagamento:* ${data.gender}` +
+        (data.gender === 'dinheiro' ? `\n💵 *Troco para:* R$ ${data.change}` : '');
 
       // Abrir WhatsApp com a mensagem formatada
       const phoneNumber = "5537999865444"; // Substitua pelo número do restaurante
       const whatsappUrl = `https://api.whatsapp.com/send?phone=${phoneNumber}&text=${encodeURIComponent(message)}`;
       window.open(whatsappUrl, '_blank');
 
+      reset({
+        name: "",
+        address: "",
+        number: "",
+        reference: "",
+        change: ""
+
+      })
       clearCart();
       toggleSidebar(); // Fechar o sidebar após enviar o pedido
-      setName('')
-      setAddress('')
-      setChangeValue('')
-      setNumber('')
-      setReference('')
-      setPaymentMethod('')
       setOpenModal(false);
-    }
+
+
+    } else
+      setOpenAlert(true)
 
 
   };
+  const isEven = () => {
+    if (parseInt(getValues("change")) < total) return false
+  }
 
   return (
     <Modal
@@ -113,11 +93,12 @@ const OrderModal = ({ isOpen }) => {
       onRequestClose={() => setOpenModal(false)}
       className={styles.modal}
       overlayClassName={styles.overlay}
-      style={{ overlay: { zIndex: 1000 } }} // Configuração inline
+      style={{ overlay: { zIndex: 9999 } }} // Configuração inline
 
     >
-      <div className={styles.modalContent} translate='no'>
 
+      <div className={styles.modalContent} translate='no'>
+        <CardFade open={openAlert} type={'warning'}><CiCircleAlert size={25} color='rgba(182,150,65,0.84)' /><span style={{ marginLeft: '10px', color: 'rgba(182,150,65,0.84)', fontWeight: 'bold' }}>Por favor, Resolva o CAPTCHA</span></CardFade>
         {/* Botão de Fechar */}
         <button onClick={() => setOpenModal(false)} className={styles.closeButton}>
           &times;
@@ -140,21 +121,25 @@ const OrderModal = ({ isOpen }) => {
           </div>
         </div>
 
-        <form onSubmit={handleFormSubmit}>
+        <form onSubmit={handleSubmit(onSubmit)}>
           <div className={styles.inputRow}>
 
-            <div className={`${styles.formField} ${isFormValid ? styles.errorField : ''}`}>
+            <div className={`${styles.formField} ${errors.name? styles.errorField : ''}`}>
               <label>Nome:</label>
-              <input type="text" value={name} onChange={handleName} />
-              {isFormValid && (
+              <input {...register("name", { required: true, maxLength: 50 })} aria-invalid={errors.name ? "true" : "false"} />
+              {errors.name?.type === "required" && (
                 <span className={styles.errorMessage}>⚠️ Este campo é obrigatório</span>
+              )}
+              {errors.name?.type === 'maxLength' && (
+                <span className={styles.errorMessage}>Máximo 50 caracteres</span>
               )}
             </div>
 
-            <div className={`${styles.formField} ${errorAdress ? styles.errorField : ''}`}>
+            <div className={`${styles.formField} ${errors.address ? styles.errorField : ''}`}>
               <label>Endereço:</label>
-              <input type="text" value={address} onChange={handleAddress} />
-              {errorAdress && (
+              <input {...register("address", { required: true })}
+                aria-invalid={errors.address ? "true" : "false"} />
+              {errors.address?.type === "required" && (
                 <span className={styles.errorMessage}>⚠️ Este campo é obrigatório</span>
               )}
             </div>
@@ -163,11 +148,14 @@ const OrderModal = ({ isOpen }) => {
           <div className={styles.inputRow}>
             <div className={styles.formField}>
               <label>Número da Rua:</label>
-              <input type="text" value={number} onChange={handleNumber} />
+              <input {...register("number", { maxLength: 10 })} />
+              {errors.number?.type === 'maxLength' && (
+                <span className={styles.errorMessage}>Máximo 10 caracteres</span>
+              )}
             </div>
             <div className={styles.formField}>
               <label>Referência:</label>
-              <input type="text" value={reference} onChange={handleReference} />
+              <input {...register("reference")} />
             </div>
           </div>
 
@@ -187,33 +175,39 @@ const OrderModal = ({ isOpen }) => {
 
             <div className={styles.paymentOption}>
               <label>Forma de Pagamento:</label>
-              <label>
-                <input type="radio" value="dinheiro" checked={paymentMethod === 'dinheiro'} onChange={handlePaymentChange} />
-                Dinheiro
-              </label>
-              <label>
-                <input type="radio" value="cartão" checked={paymentMethod === 'cartão'} onChange={handlePaymentChange} />
-                Cartão
-              </label>
-              <label>
-                <input type="radio" value="pix" checked={paymentMethod === 'pix'} onChange={handlePaymentChange} />
-                Pix
-              </label>
-              {errorPaymentMethod && (
-                <span className={styles.errorMessage}>⚠️ Este campo é obrigatório</span>
-              )}
+
+              <select {...register("gender")} onChange={e => setSelect(e.target.value)}>
+                <option value="dinheiro">Dinheiro</option>
+                <option value="cartao">Cartão</option>
+                <option value="pix">Pix</option>
+              </select>
             </div>
-            {paymentMethod === 'dinheiro' && (
-              <div className={`${styles.formField} ${errorChangeValue ? styles.errorField : ''}`}>
+            {select === 'dinheiro' && (
+              <div className={`${styles.formField} ${errors.change ? styles.errorField : ''}`}>
                 <label>Troco para:</label>
-                <input type="number" placeholder="Informe o valor" value={changeValue} onChange={handleChangeValue} />
-                {errorChangeValue && (
+                <input type="number" placeholder="Informe o valor"
+                  {...register("change", {
+                    required: true,
+                    validate: isEven
+                  })} aria-invalid={errors.change ? "true" : "false"} />
+                {errors.change?.type === 'required' && (
                   <span className={styles.errorMessage}>⚠️ Este campo é obrigatório</span>
+                )}
+                {errors.change?.type === 'validate' && (
+                  <span className={styles.errorMessage}>⚠️ Valor deve ser maior que o total</span>
                 )}
               </div>
             )}
           </div>
-          <button type="submit" className={styles.button}>Confirmar Pedido</button>
+          <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '15px' }}>
+            <button type="submit" className={styles.button}>Confirmar Pedido</button>
+
+            <ReCAPTCHA
+              sitekey={"6LcopXsqAAAAAEO4laLVeegPhFH7t6kR9y0GYchx"}
+              onChange={setCaptcha} size={screenWidth > 992 ? 'normal' : 'compact'} />
+
+          </div>
+
         </form>
       </div>
     </Modal>

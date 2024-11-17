@@ -114,7 +114,7 @@ function App() {
 
       </CSSTransition>
 
-      <CardFade open={openAlert}><CiCircleAlert size={25} color='#198754' /><span style={{ marginLeft: '10px', color: '#198754', fontWeight: 'bold' }}>Item Adicionado no carrinho</span></CardFade>
+      <CardFade open={openAlert} type={'sucess'}><CiCircleAlert size={25} color='#198754' /><span style={{ marginLeft: '10px', color: '#198754', fontWeight: 'bold' }}>Item Adicionado no carrinho</span></CardFade>
 
       <main className={`content ${isNav || isSidebarOpen ? 'withSidebar' : ''}`}>
 

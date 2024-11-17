@@ -1,6 +1,8 @@
 .cardBody {
-    width: 350px;
- 
+    width: 355px;   
+    
+    background: none !important; 
+    border: none !important;
     /*display: flex;*/
     /*justify-content: flex-start;*/
     /*flex-wrap: nowrap;*/
@@ -8,12 +10,25 @@
 
 }
 
-.div {
+.success {
     width: 355px;
     border-radius: 10px;
     border-inline-start: solid;
     border-inline-end: solid;
     border-color: #198754;
+    background-color: #ffff;
+
+    
+    
+}
+.warning {
+    width: 355px;
+    border-radius: 10px;
+    border-inline-start: solid;
+    border-inline-end: solid;
+    border-color: #f6d606;
+    background-color: #fef9f3;
+    color: #a94442;
 
     
     
