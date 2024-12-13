@@ -2,7 +2,7 @@
 
 ## Tutorial YouTube link - [React JS Restaurant Website Project | Responsive Bootstrap 5 Design](https://youtu.be/MczKE_IWNjQ?si=O3S3Stx1bhVgza3X)
 
-<img src="React JS Restaurant Website Img.jpg" alt="React JS Restaurant Website" />
+<img src="p1.png" alt="React JS Restaurant Website" />
 
 ## For this website I used:
 - [React JS](https://react.dev/)
@@ -43,6 +43,15 @@ Your app is ready to be deployed!
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
 ### `npm run eject`
+
+# Project Overview:
+
+This project is a website developed for a pizzeria, designed to enhance the customer's online ordering experience. The website includes a dynamic shopping cart feature built with React.js, allowing users to:
+
+Add and remove items to/from their order.
+Automatically calculate the total order value.
+Send orders directly via WhatsApp integration.
+The primary goal was to create a responsive and user-friendly interface while optimizing functionality for seamless customer interaction.
 
 **Note: this is a one-way operation. Once you `eject`, you can't go back!**
 
