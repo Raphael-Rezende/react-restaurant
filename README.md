@@ -19,6 +19,14 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 In the project directory, you can run:
 
+### `Initial Instructions `
+
+To run on your machine, download Node JS in version v20.18.1(LTS) [https://nodejs.org/en/download/prebuilt-installer]
+
+Then download the project file or do a 'git clone' to the desired destination.
+
+In the project directory, run 'npm install' to install all necessary packages. After that, you can continue with the following instructions:
+
 ### `npm start`
 
 Runs the app in the development mode.\
